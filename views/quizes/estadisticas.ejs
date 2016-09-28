@@ -7,11 +7,8 @@
   </head>
   <body>
     <h1>Quiz: el juego de las preguntas</h1>
-    <form method="get" action="/quizes/answer">
-    Preguntas: <%= pregunta %><p>
-    
-    <input type="text" name="respuesta" value="Responda aquí">
-    <input type="submit" name="Enviar" value="Enviar">  
-    </form>
+    <h2>Estadisticas:</h2>
+    <p>Aciertos: <%= aciertos %></p>
+    <p>Fallos: <%= fallos %></p>
   </body>
 </html>
