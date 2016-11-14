@@ -4,13 +4,17 @@
   	<meta charset="utf-8">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
-  <body>
-  <form method="get" action="/quizes/<%= quiz.id %>/answer">
+  <body>       
+  <form method="get" action="/quizes/<%= quiz.id %>/answer?<%= fallos %>">
     Pregunta: <%= quiz.pregunta %> <p>
+    <input type="hidden" name="fallos" value="<%= fallos %>" />
     <input type="text" name="respuesta" value="Respuesta" />
     <input type="submit" value="Enviar">
-
   </form>
+     <% if(typeof(fallos) != "undefined"){ %>
+          PISTA: La respuesta comienza por = <%= letra %><p>
+          Fallos:  <%= fallos %><p>
+     <%}%>
     <a href="/quizes"> Volver</a>
   </body>
 </html>

@@ -7,7 +7,12 @@
   <body>
     <p>
        <%= respuesta %><p>
-       <a href="/quizes/<%= quiz.id %>"> Volver</a>
+       <% if(respuesta == "Incorrecto"){ %>
+          <a href="/quizes/<%= quiz.id %>?fallos=<%= fallos %>"> Volver</a>
+       <%} else{ %>   
+          <a href="/quizes/<%= quiz.id %>"> Volver</a>
+       <%}%>
+        
     </p>
   </body>
 </html>
