@@ -16,6 +16,15 @@
  	}
  };
 
+  // MW de autorizacion de accesos Usuarios HTTP restringidos
+ exports.userRequired = function(req, res, next){
+ 	if(req.session.user && req.session.user.username == req.user.username || req.session.user && req.session.user.username == "admin"){
+ 		next();
+ 	} else{
+ 		res.redirect('/quizes');
+ 	}
+ };
+
 // Get /login --- Formulario de login
 exports.new = function (req, res) {
 	var errors = req.session.errors || {};

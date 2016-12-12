@@ -1,0 +1,21 @@
+<p>Listado de usuarios:</p>
+<center><table>
+  <% var i; for (i=0; i < user.length; i++) { %>
+    <tr>
+    <td><%= i+1 %> - <%= user[i].username %></td>
+    <%if(session.user  && (session.user.username == user[i].username) 
+      || session.user && session.user.username == "admin"){%>
+      <td><a href="users/<%= user[i].id %>/edit"><button>editar</button></a></td>
+      <%}if(session.user && session.user.username == "admin"){%>
+      <td>
+        <form method="post" action="users/<%= user[i].id %>?_method=delete">
+          <button type="submit" onClick="return confirm('Borrar: <%= user[i].username %>');">
+            borrar
+          </button>
+        </form>
+      </td>
+      <%}%>
+    </tr>
+  <% } %>
+</table></center>
+<a href="/users/new"><button type="button">Crear usuario</button></a>
