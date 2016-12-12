@@ -48,7 +48,16 @@ exports.create = function(req, res){
 
 	//Crear req.session.user y guardar campos id y username
 	// La sesion se define por la existencia de: req.session.user
-	req.session.user = {id:user.id, username:user.username};
+	var acierto = 0;
+
+	if(req.session.aciertos){
+		acierto = req.session.aciertos;
+		req.session.aciertos = 0;
+	}else{
+		acierto = 0;
+	}
+
+	req.session.user = {id:user.id, username:user.username, aciertos: acierto};
 	res.redirect(req.session.redir.toString()); //Redirecion a path anterior a login
 	});
 };

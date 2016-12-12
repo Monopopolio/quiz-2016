@@ -21,12 +21,31 @@ exports.show = function (req, res) {
 
 //GET /quizes/:id/answer
 exports.answer = function(req, res){
-	var resultado = 'Incorrecto';
-	if (req.query.respuesta.toUpperCase() === req.quiz.respuesta.toUpperCase()){
-		resultado = 'Correcto';
+	var resultado = '';
+	var acierto = 0;
+	if(req.session.user){
+		acierto = req.session.user.aciertos;
+	}else if(isNaN(req.session.aciertos)){
+		acierto = 0;
+	}else{
+		acierto = req.session.aciertos;
+	}
+	
+	if(req.query.respuesta){
+		resultado = 'Incorrecto';
+		if (req.query.respuesta.toUpperCase() === req.quiz.respuesta.toUpperCase()){
+			resultado = 'Correcto';
+			acierto = acierto + 1;
+			if(req.session.user){
+				req.session.user.aciertos = acierto;
+			}else{
+				req.session.aciertos = acierto;
+			}
+		}
 	}
 	res.render('quizes/answer',{ quiz: req.quiz,
 		respuesta: resultado,
+		aciertos: acierto,
 		errors: []
 	}
 	);
